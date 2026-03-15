@@ -9,31 +9,43 @@ const KEYS = {
 };
 
 const DEFAULT_USERS: User[] = [
-  { id: '1', name: 'Admin User', email: 'admin@autogo.com', role: UserRole.ADMIN },
-  { id: '2', name: 'John Tech', email: 'tech@autogo.com', role: UserRole.TECHNICIAN },
-  { id: '3', name: 'Mohamed Ahmed', email: 'mohamed@autogo.com', role: UserRole.CUSTOMER, isPro: true }
+  { id: '1', name: 'Admin Operative', email: 'admin@autogo.com', role: UserRole.ADMIN, password: 'admin123' },
+  { id: '2', name: 'Expert Technician', email: 'tech@autogo.com', role: UserRole.TECHNICIAN, password: 'tech123' },
+  { id: '3', name: 'Mohamed Customer', email: 'mohamed@autogo.com', role: UserRole.CUSTOMER, isPro: true, password: 'user123' }
 ];
 
 export const db = {
   init: () => {
-    if (!localStorage.getItem(KEYS.USERS)) {
-      localStorage.setItem(KEYS.USERS, JSON.stringify(DEFAULT_USERS));
-    }
-    if (!localStorage.getItem(KEYS.REQUESTS)) {
-      localStorage.setItem(KEYS.REQUESTS, JSON.stringify([]));
-    }
-    if (!localStorage.getItem(KEYS.APPLICATIONS)) {
-      localStorage.setItem(KEYS.APPLICATIONS, JSON.stringify([]));
+    try {
+      if (!localStorage.getItem(KEYS.USERS)) {
+        localStorage.setItem(KEYS.USERS, JSON.stringify(DEFAULT_USERS));
+      }
+      if (!localStorage.getItem(KEYS.REQUESTS)) {
+        localStorage.setItem(KEYS.REQUESTS, JSON.stringify([]));
+      }
+      if (!localStorage.getItem(KEYS.APPLICATIONS)) {
+        localStorage.setItem(KEYS.APPLICATIONS, JSON.stringify([]));
+      }
+    } catch (e) {
+      console.warn('LocalStorage is not available:', e);
     }
   },
 
-  getUsers: (): User[] => JSON.parse(localStorage.getItem(KEYS.USERS) || '[]'),
+  getUsers: (): User[] => {
+    try {
+      const data = localStorage.getItem(KEYS.USERS);
+      return data ? JSON.parse(data) : DEFAULT_USERS;
+    } catch {
+      return DEFAULT_USERS;
+    }
+  },
   
   registerUser: (userData: Omit<User, 'id'>) => {
     const users = db.getUsers();
-    // التحقق من عدم وجود البريد مسبقاً
-    if (users.find(u => u.email === userData.email)) {
-      throw new Error('Email already registered');
+    const existingUser = users.find(u => u.email.toLowerCase() === userData.email.toLowerCase());
+    
+    if (existingUser) {
+      throw new Error('EMAIL_EXISTS');
     }
     
     const newUser: User = {
@@ -42,22 +54,58 @@ export const db = {
     };
     
     users.push(newUser);
-    localStorage.setItem(KEYS.USERS, JSON.stringify(users));
+    try {
+      localStorage.setItem(KEYS.USERS, JSON.stringify(users));
+    } catch (e) {
+      console.error('Failed to save user to localStorage:', e);
+    }
     return newUser;
   },
 
-  getRequests: (): ServiceRequest[] => JSON.parse(localStorage.getItem(KEYS.REQUESTS) || '[]'),
+  updateUser: (id: string, updates: Partial<User>) => {
+    const users = db.getUsers();
+    const index = users.findIndex(u => u.id === id);
+    if (index !== -1) {
+      const updatedUser = { ...users[index], ...updates };
+      users[index] = updatedUser;
+      try {
+        localStorage.setItem(KEYS.USERS, JSON.stringify(users));
+      } catch (e) {
+        console.error('Failed to update user in localStorage:', e);
+      }
+      
+      const current = db.getCurrentUser();
+      if (current && current.id === id) {
+        db.setCurrentUser(updatedUser);
+      }
+      return updatedUser;
+    }
+    return null;
+  },
+
+  getRequests: (): ServiceRequest[] => {
+    try {
+      const data = localStorage.getItem(KEYS.REQUESTS);
+      return data ? JSON.parse(data) : [];
+    } catch {
+      return [];
+    }
+  },
   
   addRequest: (request: Omit<ServiceRequest, 'id' | 'status' | 'createdAt'>) => {
     const requests = db.getRequests();
     const newRequest: ServiceRequest = {
       ...request,
-      id: Math.random().toString(36).substr(2, 9),
+      id: 'atg-' + Math.random().toString(36).substr(2, 5),
       status: RequestStatus.PENDING,
       createdAt: new Date().toISOString()
     };
     requests.push(newRequest);
-    localStorage.setItem(KEYS.REQUESTS, JSON.stringify(requests));
+    try {
+      localStorage.setItem(KEYS.REQUESTS, JSON.stringify(requests));
+    } catch (e) {
+      console.error('Failed to save request to localStorage:', e);
+    }
     return newRequest;
   },
 
@@ -66,31 +114,52 @@ export const db = {
     const index = requests.findIndex(r => r.id === id);
     if (index !== -1) {
       requests[index] = { ...requests[index], ...updates };
-      localStorage.setItem(KEYS.REQUESTS, JSON.stringify(requests));
+      try {
+        localStorage.setItem(KEYS.REQUESTS, JSON.stringify(requests));
+      } catch (e) {
+        console.error('Failed to update request in localStorage:', e);
+      }
     }
   },
 
-  getApplications: (): JobApplication[] => JSON.parse(localStorage.getItem(KEYS.APPLICATIONS) || '[]'),
-
-  addApplication: (app: Omit<JobApplication, 'id' | 'status'>) => {
-    const apps = db.getApplications();
-    const newApp: JobApplication = {
-      ...app,
-      id: Math.random().toString(36).substr(2, 9),
+  addApplication: (application: Omit<JobApplication, 'id' | 'status'>) => {
+    let applications: JobApplication[] = [];
+    try {
+      applications = JSON.parse(localStorage.getItem(KEYS.APPLICATIONS) || '[]');
+    } catch {
+      applications = [];
+    }
+    
+    const newApplication: JobApplication = {
+      ...application,
+      id: 'app-' + Math.random().toString(36).substr(2, 5),
       status: 'PENDING'
     };
-    apps.push(newApp);
-    localStorage.setItem(KEYS.APPLICATIONS, JSON.stringify(apps));
-    return newApp;
+    
+    applications.push(newApplication);
+    try {
+      localStorage.setItem(KEYS.APPLICATIONS, JSON.stringify(applications));
+    } catch (e) {
+      console.error('Failed to save application to localStorage:', e);
+    }
+    return newApplication;
   },
 
   getCurrentUser: (): User | null => {
-    const user = localStorage.getItem(KEYS.CURRENT_USER);
-    return user ? JSON.parse(user) : null;
+    try {
+      const user = localStorage.getItem(KEYS.CURRENT_USER);
+      return user ? JSON.parse(user) : null;
+    } catch {
+      return null;
+    }
   },
 
   setCurrentUser: (user: User | null) => {
-    if (user) localStorage.setItem(KEYS.CURRENT_USER, JSON.stringify(user));
-    else localStorage.removeItem(KEYS.CURRENT_USER);
+    try {
+      if (user) localStorage.setItem(KEYS.CURRENT_USER, JSON.stringify(user));
+      else localStorage.removeItem(KEYS.CURRENT_USER);
+    } catch (e) {
+      console.error('Failed to set current user in localStorage:', e);
+    }
   }
 };

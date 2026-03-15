@@ -19,12 +19,17 @@ import Coverage from './pages/Coverage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import FleetSales from './pages/FleetSales';
+import Payment from './pages/Payment';
+import Profile from './pages/Profile';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
+import { translations, Language } from './translations';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('home');
+  const [selectedPlan, setSelectedPlan] = useState<any>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [lang, setLang] = useState<Language>('en');
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   useEffect(() => {
@@ -32,17 +37,20 @@ const App: React.FC = () => {
     const savedUser = db.getCurrentUser();
     if (savedUser) setUser(savedUser);
     
-    // محاكاة تحميل النظام الأولي لمدة 3 ثوانٍ لإظهار اللودنج بيدج
     const timer = setTimeout(() => {
       setIsInitialLoading(false);
-    }, 3000);
+    }, 1200);
 
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    // التمرير لأعلى الصفحة عند التنقل
-    window.scrollTo(0, 0);
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
   const handleLogout = () => {
@@ -51,27 +59,42 @@ const App: React.FC = () => {
     setCurrentPage('home');
   };
 
+  const handleUpdateUser = (updatedUser: User) => {
+    setUser(updatedUser);
+  };
+
+  const navigateToPayment = (plan: any) => {
+    if (!user) {
+      setCurrentPage('login');
+      return;
+    }
+    setSelectedPlan(plan);
+    setCurrentPage('payment');
+  };
+
   const renderPage = () => {
     switch (currentPage) {
-      case 'home': return <Home onNavigate={setCurrentPage} />;
-      case 'login': return <Login onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} />;
-      case 'signup': return <Signup onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} />;
-      case 'services': return <ServicesPage />;
+      case 'home': return <Home onNavigate={setCurrentPage} lang={lang} />;
+      case 'login': return <Login onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} lang={lang} />;
+      case 'signup': return <Signup onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} lang={lang} />;
+      case 'services': return <ServicesPage onNavigate={setCurrentPage} lang={lang} />;
       case 'coverage': return <Coverage />;
-      case 'request': return user ? <RequestService user={user} onComplete={() => setCurrentPage('dashboard')} /> : <Login onLogin={(u) => { setUser(u); setCurrentPage('request'); }} onNavigate={setCurrentPage} />;
+      case 'request': return user ? <RequestService user={user} onComplete={() => setCurrentPage('dashboard')} lang={lang} /> : <Login onLogin={(u) => { setUser(u); setCurrentPage('request'); }} onNavigate={setCurrentPage} lang={lang} />;
       case 'dashboard': 
-        if (!user) return <Login onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} />;
+        if (!user) return <Login onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} lang={lang} />;
         if (user.role === UserRole.ADMIN) return <AdminDashboard />;
-        if (user.role === UserRole.TECHNICIAN) return <TechDashboard user={user} />;
+        if (user.role === UserRole.TECHNICIAN) return <TechDashboard user={user} lang={lang} />;
         return <CustomerDashboard user={user} onNavigate={setCurrentPage} />;
+      case 'profile': return user ? <Profile user={user} onUpdate={handleUpdateUser} lang={lang} /> : <Login onLogin={(u) => { setUser(u); setCurrentPage('profile'); }} onNavigate={setCurrentPage} lang={lang} />;
       case 'careers': return <Careers />;
       case 'about': return <About />;
-      case 'contact': return <Contact />;
-      case 'pro': return <ProPlans />;
+      case 'contact': return <Contact lang={lang} />;
+      case 'pro': return <ProPlans onSubscribe={navigateToPayment} />;
+      case 'payment': return <Payment plan={selectedPlan} user={user!} lang={lang} onComplete={() => setCurrentPage('dashboard')} />;
       case 'privacy': return <PrivacyPolicy />;
       case 'terms': return <TermsOfService />;
-      case 'fleet': return <FleetSales />;
-      default: return <Home onNavigate={setCurrentPage} />;
+      case 'fleet': return <FleetSales onNavigate={setCurrentPage} />;
+      default: return <Home onNavigate={setCurrentPage} lang={lang} />;
     }
   };
 
@@ -80,17 +103,19 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-zinc-950 text-zinc-100 animate-in fade-in duration-700">
+    <div className={`min-h-screen flex flex-col bg-zinc-950 text-zinc-100 animate-in fade-in duration-700 ${lang === 'ar' ? 'font-arabic' : ''}`}>
       <Navbar 
         user={user} 
         onLogout={handleLogout} 
-        onNavigate={setCurrentPage} 
+        onNavigate={onNavigate => setCurrentPage(onNavigate)} 
         currentPage={currentPage}
+        lang={lang}
+        setLang={setLang}
       />
-      <main className="flex-grow pt-24 md:pt-28">
+      <main className="flex-grow pt-20">
         {renderPage()}
       </main>
-      <Footer onNavigate={setCurrentPage} />
+      <Footer onNavigate={setCurrentPage} lang={lang} />
     </div>
   );
 };

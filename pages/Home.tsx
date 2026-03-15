@@ -1,109 +1,134 @@
 
 import React from 'react';
+import { translations, Language } from '../translations';
 
 interface HomeProps {
   onNavigate: (page: string) => void;
+  lang: Language;
 }
 
-const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+const Home: React.FC<HomeProps> = ({ onNavigate, lang }) => {
+  const t = translations[lang].hero;
+
   return (
-    <div className="space-y-24">
+    <div className="space-y-32">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden py-12 md:py-20">
+      <section className="relative min-h-[95vh] flex items-center overflow-hidden py-12 md:py-20 animate-in fade-in duration-1000">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1486006920555-c77dcf18193b?auto=format&fit=crop&q=80&w=2000" 
-            className="w-full h-full object-cover opacity-30 grayscale"
-            alt="Highway background"
+            src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2000&auto=format&fit=crop" 
+            className="w-full h-full object-cover opacity-50 scale-110 animate-float"
+            alt="Luxury Sport Car"
+            loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/90 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/70 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <span className="inline-block px-4 py-1.5 mb-8 text-sm font-semibold tracking-wider text-blue-400 uppercase bg-blue-400/10 border border-blue-400/20 rounded-full">
-              <i className="fa-solid fa-bolt mr-2"></i> 24/7 Roadside Excellence
-            </span>
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-8 font-brand">
-              Your Garage <br />
-              Comes <span className="text-blue-500">To You.</span>
+          <div className={`max-w-2xl ${lang === 'ar' ? 'text-right' : ''}`}>
+            <div className="flex items-center gap-3 mb-10">
+              <span className="px-4 py-1.5 text-[10px] font-black tracking-[0.2em] text-blue-400 uppercase bg-blue-600/10 border border-blue-400/20 rounded-full animate-pulse">
+                <i className="fa-solid fa-satellite-dish mr-2"></i> {t.badge}
+              </span>
+            </div>
+            <h1 className="text-7xl md:text-9xl font-black leading-[0.9] mb-12 font-brand text-white tracking-tighter">
+              {lang === 'ar' ? (
+                <>الورشة بتجيلك <br /><span className="text-blue-500">لحد عندك.</span></>
+              ) : (
+                <>The Garage <br/><span className="text-blue-500">Comes to You.</span></>
+              )}
             </h1>
-            <p className="text-xl text-zinc-400 mb-12 leading-relaxed">
-              Premium mobile mechanical and electrical repairs delivered directly to your location on the road. Don't tow it—fix it on the spot.
+            <p className="text-2xl text-zinc-400 mb-16 leading-relaxed font-medium max-w-xl">
+              {t.subheadline}
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
               <button 
                 onClick={() => onNavigate('request')}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl shadow-blue-600/30 transition-all transform hover:-translate-y-1"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-6 rounded-3xl font-black text-xl shadow-2xl shadow-blue-600/40 transition-all transform hover:-translate-y-2 active:scale-95"
               >
-                Request Service
+                {t.ctaRequest}
               </button>
               <button 
-                onClick={() => onNavigate('careers')}
-                className="bg-zinc-800 hover:bg-zinc-700 text-white px-10 py-5 rounded-2xl font-bold text-lg border border-zinc-700 transition-all"
+                onClick={() => onNavigate('signup')}
+                className="bg-zinc-900/50 backdrop-blur-xl hover:bg-zinc-800 text-white px-12 py-6 rounded-3xl font-black text-xl border border-zinc-800 transition-all hover:border-zinc-600"
               >
-                Join AutoGo
+                {t.ctaJoin}
               </button>
-            </div>
-            
-            <div className="mt-16 flex flex-wrap items-center gap-10 border-t border-zinc-800 pt-10">
-              <div className="group cursor-default">
-                <div className="text-3xl font-bold group-hover:text-blue-500 transition-colors">150+</div>
-                <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Mobile Units</div>
-              </div>
-              <div className="h-10 w-px bg-zinc-800 hidden md:block"></div>
-              <div className="group cursor-default">
-                <div className="text-3xl font-bold group-hover:text-blue-500 transition-colors">15k</div>
-                <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Happy Drivers</div>
-              </div>
-              <div className="h-10 w-px bg-zinc-800 hidden md:block"></div>
-              <div className="group cursor-default">
-                <div className="text-3xl font-bold group-hover:text-blue-500 transition-colors">12m</div>
-                <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Avg Response</div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* Stats/Social Proof Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="order-2 md:order-1">
-            <h2 className="text-4xl font-bold mb-8 font-brand">The Breakdown Crisis</h2>
-            <p className="text-zinc-400 mb-8 text-lg leading-relaxed">
-              Highways are the most vulnerable places for a vehicle failure. Traditional towing means hours of waiting, high costs, and being stranded in remote locations.
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 border-y border-zinc-900 py-16">
+          {[
+            { label: 'Mobile Units', val: '150+' },
+            { label: 'Happy Drivers', val: '12K+' },
+            { label: 'Avg Arrival', val: '15m' },
+            { label: 'Certified Techs', val: '400+' }
+          ].map((stat, i) => (
+            <div key={i} className="text-center">
+              <div className="text-4xl font-black text-white mb-1 font-brand">{stat.val}</div>
+              <div className="text-[10px] font-black uppercase tracking-widest text-zinc-600">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Modern Grid Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+        <div className="grid md:grid-cols-2 gap-20 items-center mb-40">
+          <div className={`${lang === 'ar' ? 'order-2 text-right' : 'order-1'}`}>
+            <h2 className="text-6xl font-black mb-10 font-brand text-white tracking-tighter leading-tight">
+              Highway Freedom <br/>Starts <span className="text-blue-500">Here</span>
+            </h2>
+            <p className="text-zinc-400 mb-12 text-xl leading-relaxed">
+              We don’t just fix cars; we rescue your schedule. AutoGo units are moving workshops patrolling the major highways, equipped with expert tech and high-end tools.
             </p>
-            <div className="space-y-5">
-              {[
-                'Expensive long-distance towing fees.',
-                'Endless waiting for a tow truck to arrive.',
-                'Insecurity while stranded on remote roads.'
-              ].map((text, idx) => (
-                <div key={idx} className="flex items-center gap-4">
-                  <div className="w-6 h-6 rounded-full bg-red-500/20 flex items-center justify-center">
-                    <i className="fa-solid fa-xmark text-red-500 text-xs"></i>
-                  </div>
-                  <span className="text-zinc-300 font-medium">{text}</span>
-                </div>
-              ))}
+            <div className="grid grid-cols-2 gap-6">
+               <div className="group overflow-hidden rounded-[2.5rem] border border-zinc-800 shadow-2xl h-56 relative">
+                 <img src="https://images.unsplash.com/photo-1487754180451-c456f719c141?q=80&w=800&auto=format&fit=crop" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" alt="Tech at work" />
+                 <div className="absolute inset-0 bg-blue-600/10 group-hover:opacity-0 transition-opacity"></div>
+               </div>
+               <div className="group overflow-hidden rounded-[2.5rem] border border-zinc-800 shadow-2xl h-56 relative">
+                 <img src="https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?q=80&w=800&auto=format&fit=crop" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" alt="Tools" />
+                 <div className="absolute inset-0 bg-blue-600/10 group-hover:opacity-0 transition-opacity"></div>
+               </div>
             </div>
           </div>
-          <div className="order-1 md:order-2 bg-blue-600 rounded-[3rem] p-12 md:p-16 relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 p-8 opacity-10">
-              <i className="fa-solid fa-screwdriver-wrench text-9xl text-white"></i>
-            </div>
-            <h3 className="text-4xl font-bold text-white mb-8">The AutoGo Solution</h3>
-            <p className="text-blue-100 text-lg mb-10 leading-relaxed">
-              We bring specialized tools, genuine parts, and expert mechanics directly to your GPS coordinates. 92% of our calls are resolved without needing a tow.
+          <div className="order-1 md:order-2 bg-zinc-900 border border-zinc-800 rounded-[4rem] p-12 shadow-2xl relative overflow-hidden group">
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-600/20 rounded-full blur-[80px]"></div>
+            <h3 className="text-4xl font-black text-white mb-8 font-brand tracking-tighter">Pro Maintenance</h3>
+            <p className="text-zinc-400 text-lg mb-10 leading-relaxed">
+              Our mobile units carry full diagnostic computers, nitrogen inflators, and specialized electrical testing rigs. We bring the garage to your exact coordinates.
             </p>
-            <button 
-              onClick={() => onNavigate('services')}
-              className="bg-white text-blue-600 px-8 py-4 rounded-2xl font-bold hover:bg-zinc-100 transition-all shadow-xl"
-            >
-              Explore Services
-            </button>
+            <div className="h-80 w-full rounded-3xl overflow-hidden border border-zinc-800 relative shadow-inner">
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover group-hover:rotate-2 group-hover:scale-110 transition-transform duration-1000" alt="Mobile Workshop" />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent opacity-60"></div>
+            </div>
           </div>
+        </div>
+
+        {/* Feature Experience */}
+        <div className="grid md:grid-cols-3 gap-10">
+           {[
+             { title: 'Night Guardians', img: 'https://images.unsplash.com/photo-1534093607318-f025413f49cb?q=80&w=800&auto=format&fit=crop', icon: 'fa-moon' },
+             { title: 'Remote Precision', img: 'https://images.unsplash.com/photo-1494905998402-395d579af36f?q=80&w=800&auto=format&fit=crop', icon: 'fa-crosshairs' },
+             { title: 'Expert Hands', img: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=800&auto=format&fit=crop', icon: 'fa-wrench' }
+           ].map((item, i) => (
+             <div key={i} className="group relative h-[500px] rounded-[3rem] overflow-hidden border border-zinc-800 hover:border-blue-500 transition-all duration-500 shadow-2xl">
+               <img src={item.img} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-40 group-hover:opacity-100" alt={item.title} />
+               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent p-12 flex flex-col justify-end">
+                 <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-2xl -translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                   <i className={`fa-solid ${item.icon}`}></i>
+                 </div>
+                 <h4 className="text-4xl font-black font-brand text-white tracking-tighter mb-2">{item.title}</h4>
+                 <div className="w-12 h-1 bg-blue-500 group-hover:w-full transition-all duration-700"></div>
+               </div>
+             </div>
+           ))}
         </div>
       </section>
     </div>

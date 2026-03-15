@@ -4,26 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoGo – Your Garage Comes to You</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>AutoGo – Your Garage Comes to You | Mobile Auto Repair</title>
+    <meta name="title" content="AutoGo – Your Garage Comes to You | Mobile Auto Repair">
+    <meta name="description" content="AutoGo provides fully equipped mobile auto repair units directly to your location on highways and remote roads. Don't tow it—fix it on the spot.">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=Noto+Sans+Arabic:wght@400;700;900&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --bg-nav: rgba(9, 9, 11, 0.85);
+            --border-nav: #18181b;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #09090b;
+            color: #f4f4f5;
+            transition: background-color 0.3s ease;
         }
-        .font-brand {
-            font-family: 'Orbitron', sans-serif;
+
+        /* Essential Navbar Styling */
+        .nav-glass {
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            z-index: 1000 !important;
         }
-        @keyframes speed-line {
-            0% { transform: translateX(0); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateX(120vw); opacity: 0; }
+
+        /* Light Mode Overrides */
+        body.light-mode {
+            background-color: #ffffff !important;
+            color: #111827 !important;
         }
-        .animate-speed-line {
-            animation: speed-line linear infinite;
+        
+        body.light-mode .nav-glass {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            border-bottom: 1px solid #e5e7eb !important;
+        }
+
+        body.light-mode .text-white { color: #111827 !important; }
+        body.light-mode .text-zinc-400 { color: #4b5563 !important; }
+        body.light-mode .bg-zinc-900 { background-color: #f3f4f6 !important; }
+        body.light-mode .border-zinc-800 { border-color: #d1d5db !important; }
+
+        /* Icons Visibility */
+        body.light-mode i.fa-solid, 
+        body.light-mode i.fa-brands,
+        body.light-mode i.fa-regular {
+            color: #111827 !important;
+            opacity: 1 !important;
+        }
+
+        body.light-mode .text-blue-500,
+        body.light-mode .text-blue-500 i {
+            color: #2563eb !important;
+        }
+
+        /* Fixed Brand for Light Mode */
+        body.light-mode .font-brand { color: #111827 !important; }
+        
+        .font-brand { font-family: 'Orbitron', sans-serif; }
+        .font-arabic { font-family: 'Noto Sans Arabic', sans-serif; }
+
+        /* Ensure sign-in button is always visible */
+        .btn-signin-nav {
+            background-color: #2563eb !important;
+            color: #ffffff !important;
         }
     </style>
 <script type="importmap">
@@ -37,8 +89,10 @@
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
 <body class="bg-zinc-950 text-zinc-100">
     <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>

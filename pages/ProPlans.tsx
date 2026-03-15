@@ -2,7 +2,11 @@
 import React from 'react';
 import { PRO_PLANS } from '../constants';
 
-const ProPlans: React.FC = () => {
+interface ProPlansProps {
+  onSubscribe: (plan: any) => void;
+}
+
+const ProPlans: React.FC<ProPlansProps> = ({ onSubscribe }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
       <div className="text-center mb-20">
@@ -35,7 +39,9 @@ const ProPlans: React.FC = () => {
               ))}
             </ul>
 
-            <button className={`w-full py-4 rounded-xl font-bold transition-all ${
+            <button 
+              onClick={() => plan.price !== 'Free' && onSubscribe(plan)}
+              className={`w-full py-4 rounded-xl font-bold transition-all ${
               plan.recommended 
                 ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-xl shadow-blue-600/30' 
                 : 'bg-zinc-800 hover:bg-zinc-700 text-white'
@@ -70,8 +76,8 @@ const ProPlans: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="relative">
-          <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=800" className="rounded-3xl shadow-2xl" alt="Premium Service" />
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+          <img src="https://images.unsplash.com/photo-1542282088-fe8426682b8f?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover" alt="Premium Service" loading="lazy" />
           <div className="absolute -bottom-6 -left-6 bg-blue-600 p-8 rounded-2xl hidden md:block">
             <div className="text-4xl font-black text-white">100%</div>
             <div className="text-xs font-bold text-blue-100 uppercase tracking-widest">Peace of mind</div>

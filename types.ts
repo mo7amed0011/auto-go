@@ -17,8 +17,12 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  password?: string;
   role: UserRole;
   isPro?: boolean;
+  avatar?: string;
+  phone?: string;
+  address?: string;
 }
 
 export interface ServiceRequest {
@@ -33,6 +37,9 @@ export interface ServiceRequest {
   status: RequestStatus;
   createdAt: string;
   aiDiagnosis?: string;
+  // Added rated property to track if a customer has provided feedback for a completed service
+  rated?: boolean;
+  techNotes?: string;
 }
 
 export interface JobApplication {

@@ -44,7 +44,7 @@ const Coverage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
       <div className="text-center mb-20">
-        <h1 className="text-5xl font-bold font-brand mb-6">Network <span className="text-blue-500">Coverage</span></h1>
+        <h1 className="text-5xl font-bold font-brand mb-6 text-white">Network <span className="text-blue-500">Coverage</span></h1>
         <p className="text-zinc-400 text-xl max-w-2xl mx-auto">
           We focus on the most critical highways and remote routes where traditional services fail to reach in time.
         </p>
@@ -63,7 +63,7 @@ const Coverage: React.FC = () => {
                 {region.status}
               </span>
             </div>
-            <h3 className="text-xl font-bold mb-2 font-brand">{region.name}</h3>
+            <h3 className="text-xl font-bold mb-2 font-brand text-white">{region.name}</h3>
             <p className="text-zinc-500 text-sm mb-6">Active mobile units patrolling 24/7 to ensure rapid arrival.</p>
             <div className="flex items-center gap-2 text-blue-400 text-sm font-bold">
               <i className="fa-solid fa-clock"></i>
@@ -80,25 +80,26 @@ const Coverage: React.FC = () => {
             <p className="text-blue-100 text-lg mb-8 leading-relaxed">
               Our goal is to cover 100% of Egypt's major travel highways by the end of this year. We are currently adding 15 new mobile garages every month.
             </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4 text-white">
+            <div className="space-y-4 text-white">
+              <div className="flex items-center gap-4">
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">1</div>
                 <span className="font-bold">Q2: Upper Egypt Highway (Cairo-Asyut)</span>
               </div>
-              <div className="flex items-center gap-4 text-white">
+              <div className="flex items-center gap-4">
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">2</div>
                 <span className="font-bold">Q3: Red Sea Coastal Road (Safaqa-Marsa Alam)</span>
               </div>
-              <div className="flex items-center gap-4 text-white">
+              <div className="flex items-center gap-4">
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">3</div>
                 <span className="font-bold">Q4: Western Desert Road expansion</span>
               </div>
             </div>
           </div>
-          <div className="bg-zinc-950/20 backdrop-blur-md border border-white/20 p-8 rounded-3xl h-[400px] flex items-center justify-center">
-             <div className="text-center">
-                <i className="fa-solid fa-map-marked-alt text-8xl text-white/50 mb-6"></i>
-                <p className="text-white font-bold">Interactive Coverage Map Loading...</p>
+          <div className="bg-zinc-950/20 backdrop-blur-md border border-white/20 p-8 rounded-3xl h-[400px] flex items-center justify-center relative group overflow-hidden">
+             <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?q=80&w=1000&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-1000" alt="Egypt Highway Map" loading="lazy" />
+             <div className="text-center relative z-10">
+                <i className="fa-solid fa-location-dot text-6xl text-white mb-6 animate-bounce"></i>
+                <p className="text-white font-bold text-xl drop-shadow-lg">15 New Units Deployed Daily</p>
              </div>
           </div>
         </div>

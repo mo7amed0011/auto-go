@@ -7,9 +7,9 @@ const About: React.FC = () => {
       <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
         <div>
           <span className="text-blue-500 font-bold uppercase tracking-widest text-sm mb-4 block">Our Story</span>
-          <h1 className="text-5xl font-bold font-brand mb-8 leading-tight">Revolutionizing the Roadside Experience</h1>
+          <h1 className="text-5xl font-bold font-brand mb-8 leading-tight text-white">Revolutionizing the Roadside Experience</h1>
           <p className="text-zinc-400 text-lg mb-6 leading-relaxed">
-            Founded by <span className="text-white font-bold">Mohamed Ahmed</span>, AutoGo was born from a simple realization: in the age of on-demand everything, why is car repair still stuck in the 20th century?
+            Founded by <span className="text-white font-bold">mo7amed0011</span>, AutoGo was born from a simple realization: in the age of on-demand everything, why is car repair still stuck in the 20th century?
           </p>
           <p className="text-zinc-400 text-lg mb-8 leading-relaxed">
             Broken down on a desert highway or a remote mountain road? You shouldn't have to wait for a tow truck just to wait again at a garage. AutoGo brings the solution directly to your GPS coordinates.
@@ -26,7 +26,9 @@ const About: React.FC = () => {
           </div>
         </div>
         <div className="relative">
-          <img src="https://images.unsplash.com/photo-1530046339160-ce3e5b0c7a2f?auto=format&fit=crop&q=80&w=800" className="rounded-3xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" alt="Workshop" />
+          <div className="rounded-3xl shadow-2xl overflow-hidden aspect-video">
+            <img src="https://images.unsplash.com/photo-1530046339160-ce3e5b0c7a2f?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Workshop Team" loading="lazy" />
+          </div>
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-zinc-900 border border-zinc-800 rounded-3xl hidden xl:flex items-center justify-center p-6 shadow-2xl">
             <div className="text-center">
               <div className="text-3xl font-black text-blue-500">10k+</div>
@@ -37,7 +39,7 @@ const About: React.FC = () => {
       </div>
 
       <div className="bg-zinc-900 rounded-[3rem] p-12 md:p-24 text-center">
-        <h2 className="text-3xl font-bold font-brand mb-16">The AutoGo Pillars</h2>
+        <h2 className="text-3xl font-bold font-brand mb-16 text-white">The AutoGo Pillars</h2>
         <div className="grid md:grid-cols-3 gap-12">
           {[
             { icon: 'fa-truck-fast', title: 'Agility', desc: 'Lightweight, rapid-deployment mobile units that reach you faster than a heavy tow truck.' },
@@ -48,7 +50,7 @@ const About: React.FC = () => {
               <div className="w-20 h-20 bg-zinc-950 rounded-2xl flex items-center justify-center mx-auto text-blue-500 text-3xl border border-zinc-800">
                 <i className={`fa-solid ${pillar.icon}`}></i>
               </div>
-              <h4 className="text-xl font-bold">{pillar.title}</h4>
+              <h4 className="text-xl font-bold text-white">{pillar.title}</h4>
               <p className="text-zinc-500 text-sm leading-relaxed">{pillar.desc}</p>
             </div>
           ))}

@@ -1,5 +1,5 @@
 {
-  "name": "AutoGo – Mobile Auto Garage",
+  "name": "auto-go",
   "description": "Premium on-demand roadside assistance. Your garage delivered to your highway location.",
   "requestFramePermissions": [
     "geolocation"
