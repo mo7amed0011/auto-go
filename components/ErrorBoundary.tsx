@@ -25,7 +25,10 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public render() {
-    if (this.state.hasError) {
+    const { hasError, error } = this.state;
+    const { children } = this.props;
+
+    if (hasError) {
       return (
         <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-4 text-center">
           <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
@@ -43,14 +46,14 @@ class ErrorBoundary extends Component<Props, State> {
           </button>
           {process.env.NODE_ENV === 'development' && (
             <pre className="mt-8 p-4 bg-zinc-900 rounded-lg text-left text-xs text-red-400 overflow-auto max-w-full">
-              {this.state.error?.toString()}
+              {error?.toString()}
             </pre>
           )}
         </div>
       );
     }
 
-    return this.children;
+    return children;
   }
 }
 

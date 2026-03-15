@@ -86,7 +86,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout, onNavigate, currentPage
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 w-full nav-glass bg-zinc-950/80 border-b border-zinc-900 transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 w-full z-50 nav-glass bg-zinc-950/80 border-b border-zinc-900 transition-all duration-300">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
