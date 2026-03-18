@@ -89,7 +89,7 @@ const TechDashboard: React.FC<TechDashboardProps> = ({ user }) => {
         <div className="flex items-center gap-8">
           <div className="w-24 h-24 rounded-[2rem] bg-zinc-950 border border-zinc-800 flex items-center justify-center text-4xl text-blue-500 relative">
              {user.avatar ? (
-                <img src={user.avatar} className="w-full h-full object-cover rounded-[2rem]" alt="Avatar" />
+                <img src={user.avatar} className="w-full h-full object-cover rounded-[2rem]" alt="Avatar" referrerPolicy="no-referrer" />
              ) : (
                 <i className="fa-solid fa-user-gear"></i>
              )}

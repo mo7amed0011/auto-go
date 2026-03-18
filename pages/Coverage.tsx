@@ -96,7 +96,7 @@ const Coverage: React.FC = () => {
             </div>
           </div>
           <div className="bg-zinc-950/20 backdrop-blur-md border border-white/20 p-8 rounded-3xl h-[400px] flex items-center justify-center relative group overflow-hidden">
-             <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?q=80&w=1000&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-1000" alt="Egypt Highway Map" loading="lazy" />
+             <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?q=80&w=1000&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-1000" alt="Egypt Highway Map" loading="lazy" referrerPolicy="no-referrer" />
              <div className="text-center relative z-10">
                 <i className="fa-solid fa-location-dot text-6xl text-white mb-6 animate-bounce"></i>
                 <p className="text-white font-bold text-xl drop-shadow-lg">15 New Units Deployed Daily</p>

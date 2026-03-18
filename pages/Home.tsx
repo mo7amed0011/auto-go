@@ -19,6 +19,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             className="w-full h-full object-cover opacity-50 scale-110 animate-float"
             alt="Luxury Sport Car"
             loading="eager"
+            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/70 to-transparent"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
@@ -84,11 +85,11 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             </p>
             <div className="grid grid-cols-2 gap-6">
                <div className="group overflow-hidden rounded-[2.5rem] border border-zinc-800 shadow-2xl h-56 relative">
-                 <img src="https://images.unsplash.com/photo-1487754180451-c456f719c141?q=80&w=800&auto=format&fit=crop" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" alt="Tech at work" />
+                 <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=800&auto=format&fit=crop" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" alt="Tech at work" referrerPolicy="no-referrer" />
                  <div className="absolute inset-0 bg-blue-600/10 group-hover:opacity-0 transition-opacity"></div>
                </div>
                <div className="group overflow-hidden rounded-[2.5rem] border border-zinc-800 shadow-2xl h-56 relative">
-                 <img src="https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?q=80&w=800&auto=format&fit=crop" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" alt="Tools" />
+                 <img src="https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?q=80&w=800&auto=format&fit=crop" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" alt="Tools" referrerPolicy="no-referrer" />
                  <div className="absolute inset-0 bg-blue-600/10 group-hover:opacity-0 transition-opacity"></div>
                </div>
             </div>
@@ -100,7 +101,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
               Our mobile units carry full diagnostic computers, nitrogen inflators, and specialized electrical testing rigs. We bring the garage to your exact coordinates.
             </p>
             <div className="h-80 w-full rounded-3xl overflow-hidden border border-zinc-800 relative shadow-inner">
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover group-hover:rotate-2 group-hover:scale-110 transition-transform duration-1000" alt="Mobile Workshop" />
+              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover group-hover:rotate-2 group-hover:scale-110 transition-transform duration-1000" alt="Mobile Workshop" referrerPolicy="no-referrer" />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent opacity-60"></div>
             </div>
           </div>
@@ -114,7 +115,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
              { title: 'Expert Hands', img: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=800&auto=format&fit=crop', icon: 'fa-wrench' }
            ].map((item, i) => (
              <div key={i} className="group relative h-[500px] rounded-[3rem] overflow-hidden border border-zinc-800 hover:border-blue-500 transition-all duration-500 shadow-2xl">
-               <img src={item.img} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-40 group-hover:opacity-100" alt={item.title} />
+               <img src={item.img} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-40 group-hover:opacity-100" alt={item.title} referrerPolicy="no-referrer" />
                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent p-12 flex flex-col justify-end">
                  <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 shadow-2xl -translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                    <i className={`fa-solid ${item.icon}`}></i>

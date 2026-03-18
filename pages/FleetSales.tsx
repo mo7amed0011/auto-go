@@ -75,9 +75,9 @@ const FleetSales: React.FC<FleetSalesProps> = ({ onNavigate }) => {
       
       {/* Fleet Visualization */}
       <div className="mt-24 grid md:grid-cols-3 gap-8">
-         <img src="https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?q=80&w=500&auto=format&fit=crop" className="rounded-3xl h-64 w-full object-cover grayscale hover:grayscale-0 transition-all border border-zinc-800 shadow-xl" alt="Delivery fleet" loading="lazy" />
-         <img src="https://images.unsplash.com/photo-1519003300449-424ad040507b?q=80&w=500&auto=format&fit=crop" className="rounded-3xl h-64 w-full object-cover grayscale hover:grayscale-0 transition-all border border-zinc-800 shadow-xl" alt="Truck fleet maintenance" loading="lazy" />
-         <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=500&auto=format&fit=crop" className="rounded-3xl h-64 w-full object-cover grayscale hover:grayscale-0 transition-all border border-zinc-800 shadow-xl" alt="Corporate B2B support" loading="lazy" />
+         <img src="https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?q=80&w=500&auto=format&fit=crop" className="rounded-3xl h-64 w-full object-cover grayscale hover:grayscale-0 transition-all border border-zinc-800 shadow-xl" alt="Delivery fleet" loading="lazy" referrerPolicy="no-referrer" />
+         <img src="https://images.unsplash.com/photo-1519003300449-424ad040507b?q=80&w=500&auto=format&fit=crop" className="rounded-3xl h-64 w-full object-cover grayscale hover:grayscale-0 transition-all border border-zinc-800 shadow-xl" alt="Truck fleet maintenance" loading="lazy" referrerPolicy="no-referrer" />
+         <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=500&auto=format&fit=crop" className="rounded-3xl h-64 w-full object-cover grayscale hover:grayscale-0 transition-all border border-zinc-800 shadow-xl" alt="Corporate B2B support" loading="lazy" referrerPolicy="no-referrer" />
       </div>
     </div>
   );

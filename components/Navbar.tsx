@@ -155,6 +155,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, onLogout, onNavigate, currentPage
                     src={user.avatar || `https://ui-avatars.com/api/?name=${user.name}&background=18181b&color=3b82f6`} 
                     alt="profile" 
                     className="w-full h-full object-cover" 
+                    referrerPolicy="no-referrer"
                   />
                 </button>
                 <button 

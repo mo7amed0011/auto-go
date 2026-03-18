@@ -142,7 +142,7 @@ const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user, onNavigate 
             </div>
             
             <div className="absolute top-0 right-0 w-1/3 h-full hidden lg:block overflow-hidden">
-               <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover opacity-10 grayscale" alt="Map Overlay" />
+               <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=600&auto=format&fit=crop" className="w-full h-full object-cover opacity-10 grayscale" alt="Map Overlay" referrerPolicy="no-referrer" />
                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-zinc-900"></div>
             </div>
           </div>

@@ -65,7 +65,7 @@ const Profile: React.FC<ProfileProps> = ({ user, onUpdate }) => {
             <div className="relative group">
               <div className="w-40 h-40 rounded-[2rem] bg-zinc-800 border-8 border-zinc-900 overflow-hidden shadow-2xl transition-transform group-hover:scale-105 duration-500">
                 {formData.avatar ? (
-                  <img src={formData.avatar} alt="Avatar" className="w-full h-full object-cover" />
+                  <img src={formData.avatar} alt="Avatar" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-5xl font-black text-zinc-700 bg-zinc-800">
                     {user.name.charAt(0).toUpperCase()}
