@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../services/db';
 import { notificationService } from '../services/notification';
 import { User, UserRole } from '../types';
@@ -11,6 +11,10 @@ interface SignupProps {
 }
 
 const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate }) => {
+  useEffect(() => {
+    document.title = "AutoGo | Join the Fleet";
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',

@@ -1,7 +1,11 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Coverage: React.FC = () => {
+  useEffect(() => {
+    document.title = "AutoGo | Network Coverage";
+  }, []);
+
   const regions = [
     { 
       name: "Cairo-Alexandria Desert Road", 

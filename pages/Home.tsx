@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { translations } from '../translations';
 
 interface HomeProps {
@@ -7,6 +7,10 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  useEffect(() => {
+    document.title = "AutoGo | Home";
+  }, []);
+
   const t = translations['en'].hero;
 
   return (

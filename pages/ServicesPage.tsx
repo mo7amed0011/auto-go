@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SERVICES } from '../constants';
 
 interface ServicesPageProps {
@@ -7,6 +7,10 @@ interface ServicesPageProps {
 }
 
 const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
+  useEffect(() => {
+    document.title = "AutoGo | Our Services";
+  }, []);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
       <div className="text-center mb-20">

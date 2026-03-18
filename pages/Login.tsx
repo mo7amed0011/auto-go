@@ -10,6 +10,10 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin, onNavigate }) => {
+  useEffect(() => {
+    document.title = "AutoGo | Login";
+  }, []);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { User } from '../types';
 import { db } from '../services/db';
 
@@ -9,6 +9,10 @@ interface ProfileProps {
 }
 
 const Profile: React.FC<ProfileProps> = ({ user, onUpdate }) => {
+  useEffect(() => {
+    document.title = "AutoGo | My Profile";
+  }, []);
+
   const [formData, setFormData] = useState({
     name: user.name,
     phone: user.phone || '',

@@ -9,6 +9,10 @@ interface CustomerDashboardProps {
 }
 
 const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user, onNavigate }) => {
+  useEffect(() => {
+    document.title = "AutoGo | Customer Dashboard";
+  }, []);
+
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [selectedReq, setSelectedReq] = useState<ServiceRequest | null>(null);
   const [isCalling, setIsCalling] = useState(false);

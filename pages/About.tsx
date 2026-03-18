@@ -1,7 +1,11 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const About: React.FC = () => {
+  useEffect(() => {
+    document.title = "AutoGo | About Us";
+  }, []);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
       <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">

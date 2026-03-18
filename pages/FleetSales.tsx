@@ -1,11 +1,15 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface FleetSalesProps {
   onNavigate: (page: string) => void;
 }
 
 const FleetSales: React.FC<FleetSalesProps> = ({ onNavigate }) => {
+  useEffect(() => {
+    document.title = "AutoGo | Fleet Solutions";
+  }, []);
+
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -9,6 +9,10 @@ interface TechDashboardProps {
 }
 
 const TechDashboard: React.FC<TechDashboardProps> = ({ user }) => {
+  useEffect(() => {
+    document.title = "AutoGo | Technician Dashboard";
+  }, []);
+
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [notifiedArrival, setNotifiedArrival] = useState<Record<string, boolean>>({});
   const [completingRequest, setCompletingRequest] = useState<string | null>(null);
