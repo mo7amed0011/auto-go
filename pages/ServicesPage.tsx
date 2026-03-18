@@ -45,11 +45,10 @@ const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
       </div>
 
       {/* Visual Break - High-quality automotive images */}
-      <div className="my-24 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <img src="https://images.unsplash.com/photo-1530046339160-ce3e5b0c7a2f?q=80&w=500&auto=format&fit=crop" className="h-64 w-full object-cover rounded-2xl border border-zinc-800 shadow-lg" alt="Brake Work" loading="lazy" referrerPolicy="no-referrer" />
-        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=500&auto=format&fit=crop" className="h-64 w-full object-cover rounded-2xl border border-zinc-800 shadow-lg" alt="Engine Tools" loading="lazy" referrerPolicy="no-referrer" />
-        <img src="https://images.unsplash.com/photo-1615859131861-052f0641a60e?q=80&w=500&auto=format&fit=crop" className="h-64 w-full object-cover rounded-2xl border border-zinc-800 shadow-lg" alt="Van Interior" loading="lazy" referrerPolicy="no-referrer" />
-        <img src="https://images.unsplash.com/photo-1517026575980-3e1e2dedeab4?q=80&w=500&auto=format&fit=crop" className="h-64 w-full object-cover rounded-2xl border border-zinc-800 shadow-lg" alt="Engine Bay" loading="lazy" referrerPolicy="no-referrer" />
+      <div className="my-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=500&auto=format&fit=crop" className="h-72 w-full object-cover rounded-3xl border border-zinc-800 shadow-2xl hover:scale-105 transition-transform duration-500" alt="Engine Tools" loading="lazy" referrerPolicy="no-referrer" />
+        <img src="https://images.unsplash.com/photo-1615859131861-052f0641a60e?q=80&w=500&auto=format&fit=crop" className="h-72 w-full object-cover rounded-3xl border border-zinc-800 shadow-2xl hover:scale-105 transition-transform duration-500" alt="Van Interior" loading="lazy" referrerPolicy="no-referrer" />
+        <img src="https://images.unsplash.com/photo-1517026575980-3e1e2dedeab4?q=80&w=500&auto=format&fit=crop" className="h-72 w-full object-cover rounded-3xl border border-zinc-800 shadow-2xl hover:scale-105 transition-transform duration-500" alt="Engine Bay" loading="lazy" referrerPolicy="no-referrer" />
       </div>
 
       <div className="p-12 md:p-24 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[3rem] text-center text-white shadow-2xl shadow-blue-600/20">

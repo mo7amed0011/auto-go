@@ -27,7 +27,7 @@ const About: React.FC = () => {
         </div>
         <div className="relative">
           <div className="rounded-3xl shadow-2xl overflow-hidden aspect-video">
-            <img src="https://images.unsplash.com/photo-1530046339160-ce3e5b0c7a2f?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Workshop Team" loading="lazy" referrerPolicy="no-referrer" />
+            <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Workshop Team" loading="lazy" referrerPolicy="no-referrer" />
           </div>
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-zinc-900 border border-zinc-800 rounded-3xl hidden xl:flex items-center justify-center p-6 shadow-2xl">
             <div className="text-center">
