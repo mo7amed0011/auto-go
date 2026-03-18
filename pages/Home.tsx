@@ -1,14 +1,13 @@
 
 import React from 'react';
-import { translations, Language } from '../translations';
+import { translations } from '../translations';
 
 interface HomeProps {
   onNavigate: (page: string) => void;
-  lang: Language;
 }
 
-const Home: React.FC<HomeProps> = ({ onNavigate, lang }) => {
-  const t = translations[lang].hero;
+const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  const t = translations['en'].hero;
 
   return (
     <div className="space-y-32">
@@ -26,18 +25,14 @@ const Home: React.FC<HomeProps> = ({ onNavigate, lang }) => {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`max-w-2xl ${lang === 'ar' ? 'text-right' : ''}`}>
+          <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-10">
               <span className="px-4 py-1.5 text-[10px] font-black tracking-[0.2em] text-blue-400 uppercase bg-blue-600/10 border border-blue-400/20 rounded-full animate-pulse">
                 <i className="fa-solid fa-satellite-dish mr-2"></i> {t.badge}
               </span>
             </div>
             <h1 className="text-7xl md:text-9xl font-black leading-[0.9] mb-12 font-brand text-white tracking-tighter">
-              {lang === 'ar' ? (
-                <>الورشة بتجيلك <br /><span className="text-blue-500">لحد عندك.</span></>
-              ) : (
-                <>The Garage <br/><span className="text-blue-500">Comes to You.</span></>
-              )}
+              The Garage <br/><span className="text-blue-500">Comes to You.</span>
             </h1>
             <p className="text-2xl text-zinc-400 mb-16 leading-relaxed font-medium max-w-xl">
               {t.subheadline}
@@ -80,7 +75,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate, lang }) => {
       {/* Modern Grid Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
         <div className="grid md:grid-cols-2 gap-20 items-center mb-40">
-          <div className={`${lang === 'ar' ? 'order-2 text-right' : 'order-1'}`}>
+          <div className="order-1">
             <h2 className="text-6xl font-black mb-10 font-brand text-white tracking-tighter leading-tight">
               Highway Freedom <br/>Starts <span className="text-blue-500">Here</span>
             </h2>

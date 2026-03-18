@@ -23,13 +23,11 @@ import Payment from './pages/Payment';
 import Profile from './pages/Profile';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
-import { translations, Language } from './translations';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('home');
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
   const [user, setUser] = useState<User | null>(null);
-  const [lang, setLang] = useState<Language>('en');
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   useEffect(() => {
@@ -45,9 +43,9 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.documentElement.lang = lang;
-  }, [lang]);
+    document.documentElement.dir = 'ltr';
+    document.documentElement.lang = 'en';
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -74,27 +72,27 @@ const App: React.FC = () => {
 
   const renderPage = () => {
     switch (currentPage) {
-      case 'home': return <Home onNavigate={setCurrentPage} lang={lang} />;
-      case 'login': return <Login onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} lang={lang} />;
-      case 'signup': return <Signup onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} lang={lang} />;
-      case 'services': return <ServicesPage onNavigate={setCurrentPage} lang={lang} />;
+      case 'home': return <Home onNavigate={setCurrentPage} />;
+      case 'login': return <Login onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} />;
+      case 'signup': return <Signup onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} />;
+      case 'services': return <ServicesPage onNavigate={setCurrentPage} />;
       case 'coverage': return <Coverage />;
-      case 'request': return user ? <RequestService user={user} onComplete={() => setCurrentPage('dashboard')} lang={lang} /> : <Login onLogin={(u) => { setUser(u); setCurrentPage('request'); }} onNavigate={setCurrentPage} lang={lang} />;
+      case 'request': return user ? <RequestService user={user} onComplete={() => setCurrentPage('dashboard')} /> : <Login onLogin={(u) => { setUser(u); setCurrentPage('request'); }} onNavigate={setCurrentPage} />;
       case 'dashboard': 
-        if (!user) return <Login onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} lang={lang} />;
+        if (!user) return <Login onLogin={(u) => { setUser(u); setCurrentPage('dashboard'); }} onNavigate={setCurrentPage} />;
         if (user.role === UserRole.ADMIN) return <AdminDashboard />;
-        if (user.role === UserRole.TECHNICIAN) return <TechDashboard user={user} lang={lang} />;
+        if (user.role === UserRole.TECHNICIAN) return <TechDashboard user={user} />;
         return <CustomerDashboard user={user} onNavigate={setCurrentPage} />;
-      case 'profile': return user ? <Profile user={user} onUpdate={handleUpdateUser} lang={lang} /> : <Login onLogin={(u) => { setUser(u); setCurrentPage('profile'); }} onNavigate={setCurrentPage} lang={lang} />;
+      case 'profile': return user ? <Profile user={user} onUpdate={handleUpdateUser} /> : <Login onLogin={(u) => { setUser(u); setCurrentPage('profile'); }} onNavigate={setCurrentPage} />;
       case 'careers': return <Careers />;
       case 'about': return <About />;
-      case 'contact': return <Contact lang={lang} />;
+      case 'contact': return <Contact />;
       case 'pro': return <ProPlans onSubscribe={navigateToPayment} />;
-      case 'payment': return <Payment plan={selectedPlan} user={user!} lang={lang} onComplete={() => setCurrentPage('dashboard')} />;
+      case 'payment': return <Payment plan={selectedPlan} user={user!} onComplete={() => setCurrentPage('dashboard')} />;
       case 'privacy': return <PrivacyPolicy />;
       case 'terms': return <TermsOfService />;
       case 'fleet': return <FleetSales onNavigate={setCurrentPage} />;
-      default: return <Home onNavigate={setCurrentPage} lang={lang} />;
+      default: return <Home onNavigate={setCurrentPage} />;
     }
   };
 
@@ -103,19 +101,17 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className={`min-h-screen flex flex-col bg-zinc-950 text-zinc-100 animate-in fade-in duration-700 ${lang === 'ar' ? 'font-arabic' : ''}`}>
+    <div className="min-h-screen flex flex-col bg-zinc-950 text-zinc-100 animate-in fade-in duration-700">
       <Navbar 
         user={user} 
         onLogout={handleLogout} 
         onNavigate={onNavigate => setCurrentPage(onNavigate)} 
         currentPage={currentPage}
-        lang={lang}
-        setLang={setLang}
       />
       <main className="flex-grow pt-20">
         {renderPage()}
       </main>
-      <Footer onNavigate={setCurrentPage} lang={lang} />
+      <Footer onNavigate={setCurrentPage} />
     </div>
   );
 };

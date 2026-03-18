@@ -1,20 +1,19 @@
 
 import React, { useState } from 'react';
 import { User } from '../types';
-import { translations, Language } from '../translations';
+import { translations } from '../translations';
 
 interface PaymentProps {
   plan: any;
   user: User;
-  lang: Language;
   onComplete: () => void;
 }
 
-const Payment: React.FC<PaymentProps> = ({ plan, user, lang, onComplete }) => {
+const Payment: React.FC<PaymentProps> = ({ plan, user, onComplete }) => {
   const [method, setMethod] = useState<'card' | 'wallet' | 'paypal'>('card');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const t = translations[lang].payment;
+  const t = translations['en'].payment;
 
   if (!plan) return <div className="p-20 text-center">No plan selected.</div>;
 

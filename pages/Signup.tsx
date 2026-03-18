@@ -3,15 +3,14 @@ import React, { useState } from 'react';
 import { db } from '../services/db';
 import { notificationService } from '../services/notification';
 import { User, UserRole } from '../types';
-import { translations, Language } from '../translations';
+import { translations } from '../translations';
 
 interface SignupProps {
   onLogin: (user: User) => void;
   onNavigate: (page: string) => void;
-  lang?: Language;
 }
 
-const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate, lang = 'en' }) => {
+const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,7 +21,7 @@ const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate, lang = 'en' }) => 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const authT = translations[lang].auth;
+  const authT = translations['en'].auth;
 
   const COMPANY_CODES = {
     [UserRole.TECHNICIAN]: 'TECH2024',
@@ -60,9 +59,9 @@ const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate, lang = 'en' }) => 
       onLogin(user);
     } catch (err: any) {
       if (err.message === 'EMAIL_EXISTS') {
-        setError(lang === 'ar' ? 'هذا البريد الإلكتروني مسجل بالفعل. يرجى تسجيل الدخول أو استخدام بريد آخر.' : 'This email is already registered. Please sign in or use another email.');
+        setError('This email is already registered. Please sign in or use another email.');
       } else {
-        setError(lang === 'ar' ? 'النظام غير متاح حالياً. يرجى المحاولة مرة أخرى.' : 'System unavailable. Please try again.');
+        setError('System unavailable. Please try again.');
       }
       setLoading(false);
     }
@@ -71,20 +70,20 @@ const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate, lang = 'en' }) => 
   const roles = [
     {
       id: UserRole.CUSTOMER,
-      title: lang === 'ar' ? 'سائق (عميل)' : 'Driver (Client)',
-      desc: lang === 'ar' ? 'أطلب مساعدة على الطريق' : 'Request roadside help',
+      title: 'Driver (Client)',
+      desc: 'Request roadside help',
       icon: 'fa-car-side'
     },
     {
       id: UserRole.TECHNICIAN,
-      title: lang === 'ar' ? 'فني خبير' : 'Expert Tech',
-      desc: lang === 'ar' ? 'انضم لأسطول الصيانة' : 'Join the repair fleet',
+      title: 'Expert Tech',
+      desc: 'Join the repair fleet',
       icon: 'fa-screwdriver-wrench'
     },
     {
       id: UserRole.ADMIN,
-      title: lang === 'ar' ? 'مدير عمليات' : 'Mission Admin',
-      desc: lang === 'ar' ? 'إدارة الشبكة والوحدات' : 'Control the network',
+      title: 'Mission Admin',
+      desc: 'Control the network',
       icon: 'fa-shield-halved'
     }
   ];
@@ -149,7 +148,7 @@ const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate, lang = 'en' }) => 
                 <input 
                   type="text" 
                   required
-                  className={`w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner ${lang === 'ar' ? 'text-right' : ''}`}
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner"
                   placeholder="Jane Cooper"
                   value={formData.name}
                   onChange={e => setFormData({...formData, name: e.target.value})}
@@ -160,7 +159,7 @@ const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate, lang = 'en' }) => 
                 <input 
                   type="email" 
                   required
-                  className={`w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner ${lang === 'ar' ? 'text-right' : ''}`}
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner"
                   placeholder="name@example.com"
                   value={formData.email}
                   onChange={e => setFormData({...formData, email: e.target.value})}
@@ -173,7 +172,7 @@ const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate, lang = 'en' }) => 
               <input 
                 type="password" 
                 required
-                className={`w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner ${lang === 'ar' ? 'text-right' : ''}`}
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner"
                 placeholder="••••••••"
                 value={formData.password}
                 onChange={e => setFormData({...formData, password: e.target.value})}
@@ -188,7 +187,7 @@ const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate, lang = 'en' }) => 
                 <input 
                   type="text" 
                   required
-                  className={`w-full bg-blue-600/5 border border-blue-600/20 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner ${lang === 'ar' ? 'text-right' : ''}`}
+                  className="w-full bg-blue-600/5 border border-blue-600/20 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner"
                   placeholder={authT.companyCodePlaceholder}
                   value={formData.companyCode}
                   onChange={e => setFormData({...formData, companyCode: e.target.value})}
@@ -210,19 +209,19 @@ const Signup: React.FC<SignupProps> = ({ onLogin, onNavigate, lang = 'en' }) => 
                   <span>Syncing...</span>
                 </div>
               ) : (
-                lang === 'ar' ? 'إنشاء الحساب الآن' : 'Initialize Account'
+                'Initialize Account'
               )}
             </button>
           </form>
 
           <div className="mt-8 text-center">
             <p className="text-zinc-500 font-medium">
-              {lang === 'ar' ? 'هل لديك حساب بالفعل؟' : 'Already a member?'} 
+              Already a member? 
               <button 
                 onClick={() => onNavigate('login')} 
                 className="text-blue-500 font-bold hover:underline ml-1"
               >
-                {lang === 'ar' ? 'تسجيل' : 'Sign In'}
+                Sign In
               </button>
             </p>
           </div>

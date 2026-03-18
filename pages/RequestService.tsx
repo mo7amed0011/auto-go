@@ -3,15 +3,14 @@ import React, { useState } from 'react';
 import { User, RequestStatus } from '../types';
 import { db } from '../services/db';
 import { diagnoseProblem } from '../services/gemini';
-import { translations, Language } from '../translations';
+import { translations } from '../translations';
 
 interface RequestServiceProps {
   user: User;
   onComplete: () => void;
-  lang: Language;
 }
 
-const RequestService: React.FC<RequestServiceProps> = ({ user, onComplete, lang }) => {
+const RequestService: React.FC<RequestServiceProps> = ({ user, onComplete }) => {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,7 +20,7 @@ const RequestService: React.FC<RequestServiceProps> = ({ user, onComplete, lang 
     location: ''
   });
   const [diagnosis, setDiagnosis] = useState('');
-  const t = translations[lang].request;
+  const t = translations['en'].request;
 
   const handleNext = async () => {
     if (step === 1) {
@@ -58,7 +57,7 @@ const RequestService: React.FC<RequestServiceProps> = ({ user, onComplete, lang 
           ></div>
         </div>
 
-        <div className={`p-8 md:p-12 ${lang === 'ar' ? 'text-right' : ''}`}>
+        <div className="p-8 md:p-12">
           {step === 1 ? (
             <div className="space-y-8 animate-in fade-in slide-in-from-right">
               <div>
@@ -72,7 +71,7 @@ const RequestService: React.FC<RequestServiceProps> = ({ user, onComplete, lang 
                   <input 
                     type="text" 
                     placeholder={t.vehiclePlaceholder}
-                    className={`w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none ${lang === 'ar' ? 'text-right' : ''}`}
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
                     value={formData.vehicleInfo}
                     onChange={e => setFormData({...formData, vehicleInfo: e.target.value})}
                   />
@@ -85,11 +84,11 @@ const RequestService: React.FC<RequestServiceProps> = ({ user, onComplete, lang 
                     value={formData.problemType}
                     onChange={e => setFormData({...formData, problemType: e.target.value})}
                   >
-                    <option>{lang === 'ar' ? 'ميكانيكا' : 'Mechanical'}</option>
-                    <option>{lang === 'ar' ? 'كهرباء' : 'Electrical'}</option>
-                    <option>{lang === 'ar' ? 'إطارات' : 'Tires/Wheels'}</option>
-                    <option>{lang === 'ar' ? 'بطارية' : 'Battery/Starting'}</option>
-                    <option>{lang === 'ar' ? 'تسريب سوائل' : 'Fluid Leak'}</option>
+                    <option>Mechanical</option>
+                    <option>Electrical</option>
+                    <option>Tires/Wheels</option>
+                    <option>Battery/Starting</option>
+                    <option>Fluid Leak</option>
                   </select>
                 </div>
 
@@ -98,7 +97,7 @@ const RequestService: React.FC<RequestServiceProps> = ({ user, onComplete, lang 
                   <textarea 
                     rows={4}
                     placeholder={t.descPlaceholder}
-                    className={`w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none resize-none ${lang === 'ar' ? 'text-right' : ''}`}
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
                     value={formData.description}
                     onChange={e => setFormData({...formData, description: e.target.value})}
                   ></textarea>
@@ -110,7 +109,7 @@ const RequestService: React.FC<RequestServiceProps> = ({ user, onComplete, lang 
                     <input 
                       type="text" 
                       placeholder={t.locationPlaceholder}
-                      className={`w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 pr-12 focus:ring-2 focus:ring-blue-500 outline-none ${lang === 'ar' ? 'text-right pr-4 pl-12' : ''}`}
+                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 pr-12 focus:ring-2 focus:ring-blue-500 outline-none"
                       value={formData.location}
                       onChange={e => setFormData({...formData, location: e.target.value})}
                     />
@@ -120,7 +119,7 @@ const RequestService: React.FC<RequestServiceProps> = ({ user, onComplete, lang 
                           setFormData({...formData, location: `${pos.coords.latitude}, ${pos.coords.longitude}`});
                         });
                       }}
-                      className={`absolute top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-400 ${lang === 'ar' ? 'left-3' : 'right-3'}`}
+                      className="absolute top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-400 right-3"
                     >
                       <i className="fa-solid fa-location-crosshairs text-xl"></i>
                     </button>
@@ -141,7 +140,7 @@ const RequestService: React.FC<RequestServiceProps> = ({ user, onComplete, lang 
           ) : (
             <div className="space-y-8 animate-in fade-in slide-in-from-right">
               <div className="bg-blue-500/10 border border-blue-500/20 p-6 rounded-2xl">
-                <div className={`flex items-center gap-3 mb-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
                     <i className="fa-solid fa-brain text-white"></i>
                   </div>

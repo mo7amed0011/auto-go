@@ -2,15 +2,13 @@
 import React, { useState, useRef } from 'react';
 import { User } from '../types';
 import { db } from '../services/db';
-import { Language } from '../translations';
 
 interface ProfileProps {
   user: User;
   onUpdate: (user: User) => void;
-  lang: Language;
 }
 
-const Profile: React.FC<ProfileProps> = ({ user, onUpdate, lang }) => {
+const Profile: React.FC<ProfileProps> = ({ user, onUpdate }) => {
   const [formData, setFormData] = useState({
     name: user.name,
     phone: user.phone || '',
@@ -46,7 +44,7 @@ const Profile: React.FC<ProfileProps> = ({ user, onUpdate, lang }) => {
         onUpdate(updated);
         setMessage({ 
           type: 'success', 
-          text: lang === 'ar' ? 'تم تحديث بياناتك بنجاح!' : 'Your profile has been updated!' 
+          text: 'Your profile has been updated!' 
         });
       }
     } catch (err) {
@@ -62,8 +60,8 @@ const Profile: React.FC<ProfileProps> = ({ user, onUpdate, lang }) => {
       <div className="bg-zinc-900 border border-zinc-800 rounded-[2.5rem] overflow-hidden shadow-2xl">
         <div className="h-40 bg-gradient-to-r from-blue-600 via-indigo-700 to-blue-600 bg-size-200 animate-gradient"></div>
         
-        <div className={`px-8 md:px-12 pb-12 -mt-20 ${lang === 'ar' ? 'text-right' : ''}`}>
-          <div className={`flex flex-col md:flex-row items-end gap-6 mb-12 ${lang === 'ar' ? 'md:flex-row-reverse' : ''}`}>
+        <div className="px-8 md:px-12 pb-12 -mt-20">
+          <div className="flex flex-col md:flex-row items-end gap-6 mb-12">
             <div className="relative group">
               <div className="w-40 h-40 rounded-[2rem] bg-zinc-800 border-8 border-zinc-900 overflow-hidden shadow-2xl transition-transform group-hover:scale-105 duration-500">
                 {formData.avatar ? (
@@ -102,11 +100,11 @@ const Profile: React.FC<ProfileProps> = ({ user, onUpdate, lang }) => {
             <div className="space-y-6">
               <div className="group">
                 <label className="block text-sm font-bold text-zinc-500 mb-3 ml-1 group-focus-within:text-blue-500 transition-colors">
-                  {lang === 'ar' ? 'الاسم بالكامل' : 'Full Name'}
+                  Full Name
                 </label>
                 <input 
                   type="text" 
-                  className={`w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner ${lang === 'ar' ? 'text-right' : ''}`}
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner"
                   value={formData.name}
                   onChange={e => setFormData({ ...formData, name: e.target.value })}
                   required
@@ -114,11 +112,11 @@ const Profile: React.FC<ProfileProps> = ({ user, onUpdate, lang }) => {
               </div>
               <div className="group">
                 <label className="block text-sm font-bold text-zinc-500 mb-3 ml-1 group-focus-within:text-blue-500 transition-colors">
-                  {lang === 'ar' ? 'رقم التليفون' : 'Phone Number'}
+                  Phone Number
                 </label>
                 <input 
                   type="tel" 
-                  className={`w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner ${lang === 'ar' ? 'text-right' : ''}`}
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white transition-all shadow-inner"
                   value={formData.phone}
                   onChange={e => setFormData({ ...formData, phone: e.target.value })}
                 />
@@ -128,11 +126,11 @@ const Profile: React.FC<ProfileProps> = ({ user, onUpdate, lang }) => {
             <div className="space-y-6">
               <div className="group">
                 <label className="block text-sm font-bold text-zinc-500 mb-3 ml-1 group-focus-within:text-blue-500 transition-colors">
-                  {lang === 'ar' ? 'عنوانك المفضل' : 'Primary Location'}
+                  Primary Location
                 </label>
                 <textarea 
                   rows={4}
-                  className={`w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none resize-none text-white transition-all shadow-inner ${lang === 'ar' ? 'text-right' : ''}`}
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none resize-none text-white transition-all shadow-inner"
                   value={formData.address}
                   onChange={e => setFormData({ ...formData, address: e.target.value })}
                 ></textarea>
@@ -146,10 +144,10 @@ const Profile: React.FC<ProfileProps> = ({ user, onUpdate, lang }) => {
                 {isSaving ? (
                   <div className="flex items-center justify-center gap-3">
                     <div className="w-6 h-6 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
-                    <span>{lang === 'ar' ? 'جاري الحفظ...' : 'Saving Changes...'}</span>
+                    <span>Saving Changes...</span>
                   </div>
                 ) : (
-                  lang === 'ar' ? 'حفظ التعديلات' : 'Save Profile'
+                  'Save Profile'
                 )}
               </button>
             </div>

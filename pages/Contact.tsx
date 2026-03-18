@@ -1,15 +1,13 @@
 
 import React, { useState } from 'react';
-import { translations, Language } from '../translations';
+import { translations } from '../translations';
 
-interface ContactProps {
-  lang: Language;
-}
+interface ContactProps {}
 
-const Contact: React.FC<ContactProps> = ({ lang }) => {
+const Contact: React.FC<ContactProps> = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const t = translations[lang].contact;
+  const t = translations['en'].contact;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,7 +90,7 @@ const Contact: React.FC<ContactProps> = ({ lang }) => {
                   onClick={() => setIsSubmitted(false)}
                   className="text-blue-500 font-bold hover:underline"
                 >
-                  {lang === 'ar' ? 'إرسال رسالة أخرى' : 'Send another message'}
+                  Send another message
                 </button>
               </div>
             ) : (

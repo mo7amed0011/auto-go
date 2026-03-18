@@ -2,22 +2,21 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { db } from '../services/db';
 import { User, UserRole } from '../types';
-import { translations, Language } from '../translations';
+import { translations } from '../translations';
 
 interface LoginProps {
   onLogin: (user: User) => void;
   onNavigate: (page: string) => void;
-  lang?: Language;
 }
 
-const Login: React.FC<LoginProps> = ({ onLogin, onNavigate, lang = 'en' }) => {
+const Login: React.FC<LoginProps> = ({ onLogin, onNavigate }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
   const passwordInputRef = useRef<HTMLInputElement>(null);
-  const authT = translations[lang].auth;
+  const authT = translations['en'].auth;
 
   // Fixed Demo Credentials
   const DEMO_PASSWORDS: Record<string, string> = {
@@ -41,7 +40,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onNavigate, lang = 'en' }) => {
       db.setCurrentUser(foundUser);
       onLogin(foundUser);
     } else {
-      setError(lang === 'ar' ? 'بيانات الدخول غير صحيحة. يرجى التأكد من البريد الإلكتروني وكلمة المرور.' : 'Invalid credentials. Please check your email and password.');
+      setError('Invalid credentials. Please check your email and password.');
       setIsLoading(false);
     }
   };
@@ -74,19 +73,19 @@ const Login: React.FC<LoginProps> = ({ onLogin, onNavigate, lang = 'en' }) => {
   const demoRoles = [
     {
       id: UserRole.CUSTOMER,
-      title: lang === 'ar' ? 'سائق' : 'Driver',
+      title: 'Driver',
       icon: 'fa-car-side',
       color: 'border-blue-500/20 hover:border-blue-500 hover:bg-blue-500/5'
     },
     {
       id: UserRole.TECHNICIAN,
-      title: lang === 'ar' ? 'فني' : 'Tech',
+      title: 'Tech',
       icon: 'fa-screwdriver-wrench',
       color: 'border-emerald-500/20 hover:border-emerald-500 hover:bg-emerald-500/5'
     },
     {
       id: UserRole.ADMIN,
-      title: lang === 'ar' ? 'مدير' : 'Admin',
+      title: 'Admin',
       icon: 'fa-shield-halved',
       color: 'border-purple-500/20 hover:border-purple-500 hover:bg-purple-500/5'
     }
@@ -126,7 +125,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onNavigate, lang = 'en' }) => {
                     </div>
                     <div className="text-left">
                       <div className="text-sm font-black text-white group-hover:translate-x-1 transition-transform">{role.title}</div>
-                      <div className="text-[9px] text-zinc-600 font-black uppercase tracking-widest">{lang === 'ar' ? 'اختيار الرتبة' : 'Select Role'}</div>
+                      <div className="text-[9px] text-zinc-600 font-black uppercase tracking-widest">Select Role</div>
                     </div>
                   </div>
                   {email.toLowerCase() === (role.id === UserRole.ADMIN ? 'admin@autogo.com' : role.id === UserRole.TECHNICIAN ? 'tech@autogo.com' : 'mohamed@autogo.com') && (
@@ -158,7 +157,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onNavigate, lang = 'en' }) => {
                   type="email" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-blue-500 outline-none transition-all text-white text-sm ${lang === 'ar' ? 'text-right' : ''}`}
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-blue-500 outline-none transition-all text-white text-sm"
                   placeholder="name@example.com"
                   required
                 />
@@ -171,7 +170,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onNavigate, lang = 'en' }) => {
                   type="password" 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-blue-500 outline-none transition-all text-white text-sm ${lang === 'ar' ? 'text-right' : ''}`}
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-4 focus:ring-2 focus:ring-blue-500 outline-none transition-all text-white text-sm"
                   placeholder="••••••••"
                   required
                 />
@@ -198,7 +197,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onNavigate, lang = 'en' }) => {
             
             <div className="mt-8 text-center">
               <p className="text-zinc-500 text-xs">
-                {lang === 'ar' ? 'مستخدم جديد؟' : "New operative?"} <button onClick={() => onNavigate('signup')} className="text-blue-500 font-bold hover:underline">{lang === 'ar' ? 'انضم للأسطول' : 'Join the Fleet'}</button>
+                New operative? <button onClick={() => onNavigate('signup')} className="text-blue-500 font-bold hover:underline">Join the Fleet</button>
               </p>
             </div>
           </div>

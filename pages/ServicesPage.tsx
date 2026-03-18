@@ -4,11 +4,10 @@ import { SERVICES } from '../constants';
 import { Language } from '../translations';
 
 interface ServicesPageProps {
-  lang: Language;
   onNavigate: (page: string) => void;
 }
 
-const ServicesPage: React.FC<ServicesPageProps> = ({ lang, onNavigate }) => {
+const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-24">
       <div className="text-center mb-20">

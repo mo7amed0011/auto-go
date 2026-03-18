@@ -2,19 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { User, ServiceRequest, RequestStatus } from '../types';
 import { db } from '../services/db';
-import { translations, Language } from '../translations';
+import { translations } from '../translations';
 
 interface TechDashboardProps {
   user: User;
-  lang: Language;
 }
 
-const TechDashboard: React.FC<TechDashboardProps> = ({ user, lang }) => {
+const TechDashboard: React.FC<TechDashboardProps> = ({ user }) => {
   const [requests, setRequests] = useState<ServiceRequest[]>([]);
   const [notifiedArrival, setNotifiedArrival] = useState<Record<string, boolean>>({});
   const [completingRequest, setCompletingRequest] = useState<string | null>(null);
   const [techNotes, setTechNotes] = useState('');
-  const t = translations[lang].tech;
+  const t = translations['en'].tech;
 
   useEffect(() => {
     const fetchRequests = () => {
